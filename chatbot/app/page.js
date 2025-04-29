@@ -1,5 +1,4 @@
-// app/page.js
-'use client'; // This component manages state, so it must be a Client Component
+'use client'; 
 
 import { useState, useEffect, useRef } from 'react';
 import Header from '@/components/Header';
@@ -8,28 +7,21 @@ import InputArea from '@/components/InputArea';
 
 export default function ChatPage() {
   const [messages, setMessages] = useState([
-    // Example initial message (optional)
-    // { role: 'bot', content: 'Hello! How can I help you today?' }
+    { role: 'assistant', content: 'Hello! How can I help you today?' }
   ]);
-  const [isLoading, setIsLoading] = useState(false); // State for loading indicator
-  const messagesEndRef = useRef(null); // Ref to scroll to bottom
+  const messagesEndRef = useRef(null); 
 
-  // Function to scroll to the bottom of the messages list
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  // const scrollToBottom = () => {
+  //   messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  // };
 
-  // Scroll to bottom whenever messages change
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+  // useEffect(() => {
+  //   scrollToBottom();
+  // }, [messages]);
 
-  // Handle sending a new message
   const handleSendMessage = async (inputText) => {
-    // 1. Add user message immediately to the UI
     const newUserMessage = { role: 'user', content: inputText };
     setMessages(prevMessages => [...prevMessages, newUserMessage]);
-    setIsLoading(true); // Show loading indicator
 
     // --- LLM Integration Point (See Step 4) ---
     // 2. Prepare message history for API
@@ -42,39 +34,46 @@ export default function ChatPage() {
 
     // 3. Simulate API Call & Streaming (Replace with actual fetch)
     try {
-        // --- Start Placeholder ---
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        // --- Actual API call would go here (see Step 4) ---
+        const response = await fetch('/api/chat', {
+          method: 'POST', // Use the POST method to send data
+          headers: {
+            'Content-Type': 'application/json', // Tell the server we're sending JSON
+          },
+          body: JSON.stringify({ messages: messageHistory }) // Convert your array into a JSON string and send it inside an object with the key 'messages'
+        })
 
-        // Simulate a simple streamed response
-        const simulatedResponse = "This is a simulated streamed response from the bot. It will appear word by word.".split(' ');
-        let currentBotMessage = { role: 'bot', content: '' };
+        if (!response.ok || !response.body) {
+          throw new Error('Failed to get stream');
+      }
 
-        // Add initial empty bot message
-        setMessages(prev => [...prev, currentBotMessage]);
+      const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let accumulatedResponse = ""; // To build the full response text
 
-        for (let i = 0; i < simulatedResponse.length; i++) {
-            await new Promise(resolve => setTimeout(resolve, 80)); // Simulate word delay
-            currentBotMessage.content += (i > 0 ? ' ' : '') + simulatedResponse[i];
-            // Update the *last* message in the state
+        // Add an initial empty assistant message to your state here
+        setMessages(prev => [...prev, { role: 'assistant', content: '' }]);
+
+        while (true) {
+            const { done, value } = await reader.read(); // Read a chunk
+            if (done) break; // Stream finished
+
+            const textChunk = decoder.decode(value, { stream: true }); // Decode chunk to text
+            accumulatedResponse += textChunk;
+
+            // Update the *last* message (the assistant's response) in your state
             setMessages(prev => {
-                const updatedMessages = [...prev];
-                updatedMessages[updatedMessages.length - 1] = { ...currentBotMessage };
-                return updatedMessages;
+               const updated = [...prev];
+               updated[updated.length - 1].content = accumulatedResponse;
+               return updated;
             });
         }
-        // --- End Placeholder ---
-
-        // --- Actual API call would go here (see Step 4) ---
-        // const response = await fetch('/api/chat', { ... });
-        // await handleStreamingResponse(response); // You'll need a function for this
+        // --- End Streaming Logic ---
 
     } catch (error) {
         console.error("Error fetching response:", error);
         // Add an error message to the chat
         setMessages(prev => [...prev, { role: 'bot', content: 'Sorry, something went wrong.' }]);
-    } finally {
-        setIsLoading(false); // Hide loading indicator
     }
 
   };
@@ -82,9 +81,6 @@ export default function ChatPage() {
   // Handle starting a new chat
   const handleNewChat = () => {
     setMessages([]); // Clear messages array
-    setIsLoading(false); // Reset loading state
-    // Optionally add a default greeting message
-    // setMessages([{ role: 'bot', content: 'Hello! How can I help you today?' }]);
   };
 
   return (
@@ -92,24 +88,16 @@ export default function ChatPage() {
       <Header onNewChat={handleNewChat} />
 
       {/* Chat Messages Area */}
-      <div className="flex-grow overflow-y-auto p-4 space-y-4 container mx-auto">
+      <div className="flex-grow overflow-y-auto p-4 space-y-4 container px-4 sm:px-6 md:px-8 lg:px-10 2xl:p-20 min-w-screen scrollbar">
         {messages.map((msg, index) => (
           <Message key={index} message={msg} />
         ))}
+      </div>
         {/* Empty div to scroll to */}
         <div ref={messagesEndRef} />
-        {/* Optional: Show loading indicator visually in chat area */}
-        {isLoading && messages.length > 0 && messages[messages.length - 1].role === 'user' && (
-           <div className="flex justify-start mb-4">
-              <div className="max-w-xs md:max-w-md lg:max-w-lg px-4 py-3 rounded-lg shadow bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white">
-                <p className="text-sm italic">Bot is thinking...</p>
-              </div>
-           </div>
-        )}
-      </div>
 
       {/* Input Area */}
-      <InputArea onSend={handleSendMessage} isLoading={isLoading} />
+      <InputArea onSend={handleSendMessage}  />
     </div>
   );
 }
