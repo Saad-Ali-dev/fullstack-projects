@@ -1,1 +1,24 @@
 @import "tailwindcss";
+
+:root {
+  --color-headerBlue: #131921;
+  --color-headerLightBlue: #232f3e;
+  --color-button: #fbdb14;
+  --color-buttonHover: #fce444;
+}
+
+.bg-blue {
+  background-color: var(--color-headerBlue);
+}
+
+.bg-lightBlue {
+  background-color: var(--color-headerLightBlue);
+}
+
+.bg-button {
+  background-color: var(--color-button);
+}
+
+.bg-buttonHover {
+  background-color: var(--color-buttonHover);
+}
