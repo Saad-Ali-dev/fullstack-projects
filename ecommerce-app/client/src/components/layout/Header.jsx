@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Cart from "./Cart.jsx";
-import SearchBar from "./SearchBar.jsx";
-import logo from "../assets/amazon-logo.png";
+import Cart from "../Cart.jsx";
+import SearchBar from "../SearchBar.jsx";
+import logo from "../../assets/amazon-logo.png";
 import LowerHeader from "./LowerHeader.jsx";
-import SideBar from "./SideBar.jsx";
+import SideBar from "../SideBar.jsx";
 
 export default function Header() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
