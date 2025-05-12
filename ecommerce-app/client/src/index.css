@@ -22,3 +22,14 @@
 .bg-buttonHover {
   background-color: var(--color-buttonHover);
 }
+
+body {
+  background-color: #ecf4f4;
+}
+
+@media (min-width: 450px) and (max-width: 640px) {
+  .custom-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

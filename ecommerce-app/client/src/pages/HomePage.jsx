@@ -1,37 +1,52 @@
-import React from "react";
-import HeroSlider from "../components/home/HeroSlider"; // Adjust the import path as necessary
+import HeroSlider from "../components/home/HeroSlider";
+import ProductBox from "../components/home/ProductBox";
+import data from "../components/home/ProductProps.js";
+import ProductCarousel from "../components/home/ProductCarousel.jsx";
+import shoeImg1 from "../assets/shoe-img1.jpg";
+import shoeImg2 from "../assets/shoe-img2.jpg";
+import shoeImg3 from "../assets/shoe-img3.jpg";
+import shoeImg4 from "../assets/shoe-img4.jpg";
+import shoeImg5 from "../assets/shoe-img5.jpg";
+import shoeImg6 from "../assets/shoe-img6.jpg";
+import shoeImg7 from "../assets/shoe-img7.jpg";
+
+const shoeProducts = [
+  { id: "s1", imageUrl: shoeImg1, altText: "Elegant White Sneaker" },
+  { id: "s2", imageUrl: shoeImg2, altText: "Sporty Running Shoe" },
+  { id: "s3", imageUrl: shoeImg3, altText: "Casual Loafer" },
+  { id: "s4", imageUrl: shoeImg4, altText: "Hiking Boot" },
+  { id: "s5", imageUrl: shoeImg5, altText: "Classic Oxford" },
+  { id: "s6", imageUrl: shoeImg6, altText: "Summer Sandal" },
+  { id: "s7", imageUrl: shoeImg7, altText: "High Heel" },
+];
 
 export default function HomePage() {
   return (
-    <div>
-      <HeroSlider />
-      {/* Other content of your page will go here */}
-      {/* The products you mentioned "in front" would be styled and positioned
-        on top of or below this HeroSlider component in the page layout. */}
-      {/* <div className="container mx-auto p-4">
-        <h1 className="text-2xl font-bold">Welcome to Our Store!</h1>
-        {/* ... more content ... */}
-      {/* </div> */}
-    </div>
-    // <div className="container mx-auto px-4 py-8 ">
-    //   <h1 className="text-3xl font-bold mb-6 text-center">
-    //     Welcome to Amazon Clone
-    //   </h1>
-    //   <p className="text-lg text-gray-700 mb-4 text-center">
-    //     Browse our amazing selection of products. This is the homepage. More
-    //     content will be added soon!
-    //   </p>
-    //   {/* Placeholder for product listings or featured items */}
-    //   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-    //     {/* Example Product Card Placeholder */}
-    //     {[1, 2, 3, 4].map((item) => (
-    //       <div key={item} className="border rounded-lg p-4 shadow-lg">
-    //         <div className="bg-gray-200 h-48 w-full mb-4 animate-pulse"></div>
-    //         <div className="h-6 bg-gray-200 mb-2 animate-pulse w-3/4"></div>
-    //         <div className="h-4 bg-gray-200 animate-pulse w-1/2"></div>
-    //       </div>
-    //     ))}
-    //   </div>
-    // </div>
+    <>
+      <div>
+        <HeroSlider />
+      </div>
+      <div className="relative top-[-10rem] sm:top-[-12rem] md:top-[-18rem] lg:top-[-22rem]">
+        <div className="grid grid-cols-1 custom-grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4 ">
+          {data.map((section) => (
+            <ProductBox
+              key={section.id}
+              title={section.title}
+              items={section.items}
+              discoverMoreText={section.discoverMoreText}
+              discoverMoreUrl={section.discoverMoreUrl}
+            />
+          ))}
+        </div>
+        <div className="max-w-6xl mx-auto">
+          <ProductCarousel
+            title="Additional items to explore"
+            items={shoeProducts}
+            seeMoreLink="/shoes/all" // Optional: link for "See more"
+            // seeMoreText="View all shoes" // Optional: custom text for "See more"
+          />
+        </div>
+      </div>
+    </>
   );
 }
