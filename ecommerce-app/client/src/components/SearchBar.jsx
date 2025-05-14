@@ -1,11 +1,11 @@
-import React from "react";
 import { FaCaretDown, FaSearch } from "react-icons/fa";
 
 export default function SearchBar() {
   return (
     <>
       {/* Search Bar - Make it grow */}
-      <div className="flex-grow flex items-center w-full md:w-auto order-last md:order-none px-2 md:px-0 focus-within:ring-2 focus-within:ring-orange-500 transition rounded-md">
+
+      <div className="flex-grow flex items-center w-full width-90 sm:w-[90%] md:w-auto order-last md:order-none md:px-0 focus-within:ring-2 focus-within:ring-orange-500 transition rounded-md mb-2 md:mb-0 sm:mx-auto">
         {/* Category Dropdown */}
         <button className="bg-gray-200 hover:bg-gray-300 text-gray-700 text-xs px-3 h-10 rounded-l-md border-r border-gray-400 flex items-center whitespace-nowrap flex-shrink-0">
           All{" "}

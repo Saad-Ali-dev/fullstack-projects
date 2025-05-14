@@ -20,6 +20,7 @@ import beautyImg2 from "../../assets/beauty-box-img2.jpg";
 import beautyImg3 from "../../assets/beauty-box-img3.jpg";
 import beautyImg4 from "../../assets/beauty-box-img4.jpg";
 import giftBoxImg from "../../assets/gift-box-img.jpg";
+import dadGiftBoxImg from "../../assets/dad-gift-box-img.jpg";
 import accessoriesImg1 from "../../assets/accessories-img1.webp";
 import accessoriesImg2 from "../../assets/accessories-img2.webp";
 import accessoriesImg3 from "../../assets/accessories-img3.webp";
@@ -28,34 +29,34 @@ import accessoriesImg4 from "../../assets/accessories-img4.webp";
 const data = [
   {
     id: 1,
-    title: "Elevate Your Electronics",
+    title: "Level up your beauty routine",
     items: [
       {
         id: 1,
-        imageUrl: techImg1,
-        caption: "Smartphones",
+        imageUrl: beautyImg1,
+        caption: "Makeup",
         itemUrl: "/",
       },
       {
         id: 2,
-        imageUrl: techImg2,
-        caption: "Tablets",
+        imageUrl: beautyImg2,
+        caption: "Grooming",
         itemUrl: "/",
       },
       {
         id: 3,
-        imageUrl: techImg3,
-        caption: "Gaming",
+        imageUrl: beautyImg3,
+        caption: "Mirrors",
         itemUrl: "/",
       },
       {
         id: 4,
-        imageUrl: techImg4,
-        caption: "Watches",
+        imageUrl: beautyImg4,
+        caption: "Handbags",
         itemUrl: "/",
       },
     ],
-    discoverMoreText: "Discover more",
+    discoverMoreText: "See more",
     discoverMoreUrl: "/",
   },
   {
@@ -136,6 +137,38 @@ const data = [
     discoverMoreUrl: "/",
   },
   {
+    id: 6,
+    title: "Mobile Accessories",
+    items: [
+      {
+        id: 18,
+        imageUrl: accessoriesImg1,
+        caption: "Speakers",
+        itemUrl: "/",
+      },
+      {
+        id: 19,
+        imageUrl: accessoriesImg2,
+        caption: "Earphones",
+        itemUrl: "/",
+      },
+      {
+        id: 20,
+        imageUrl: accessoriesImg3,
+        caption: "Headphones",
+        itemUrl: "/",
+      },
+      {
+        id: 21,
+        imageUrl: accessoriesImg4,
+        caption: "Mobiles",
+        itemUrl: "/",
+      },
+    ],
+    discoverMoreText: "Shop Accessories",
+    discoverMoreUrl: "/",
+  },
+  {
     id: 5,
     title: "Shop deals in Fashion",
     items: [
@@ -167,45 +200,14 @@ const data = [
     discoverMoreText: "See all deals",
     discoverMoreUrl: "/",
   },
-  {
-    id: 6,
-    title: "Level up your beauty routine",
-    items: [
-      {
-        id: 18,
-        imageUrl: beautyImg1,
-        caption: "Makeup",
-        itemUrl: "/",
-      },
-      {
-        id: 19,
-        imageUrl: beautyImg2,
-        caption: "Grooming",
-        itemUrl: "/",
-      },
-      {
-        id: 20,
-        imageUrl: beautyImg3,
-        caption: "Mirrors",
-        itemUrl: "/",
-      },
-      {
-        id: 21,
-        imageUrl: beautyImg4,
-        caption: "Handbags",
-        itemUrl: "/",
-      },
-    ],
-    discoverMoreText: "See more",
-    discoverMoreUrl: "/",
-  },
+
   {
     id: 7,
-    title: "Gifts for Mother's Day",
+    title: "Best Gifts for Dad",
     items: [
       {
         id: 22,
-        imageUrl: giftBoxImg,
+        imageUrl: dadGiftBoxImg,
         itemUrl: "/",
       },
     ],
@@ -214,34 +216,34 @@ const data = [
   },
   {
     id: 8,
-    title: "Mobile Accessories",
+    title: "Elevate Your Electronics",
     items: [
       {
         id: 23,
-        imageUrl: accessoriesImg1,
-        caption: "Speakers",
+        imageUrl: techImg1,
+        caption: "Smartphones",
         itemUrl: "/",
       },
       {
         id: 24,
-        imageUrl: accessoriesImg2,
-        caption: "Earphones",
+        imageUrl: techImg2,
+        caption: "Tablets",
         itemUrl: "/",
       },
       {
         id: 25,
-        imageUrl: accessoriesImg3,
-        caption: "Headphones",
+        imageUrl: techImg3,
+        caption: "Gaming",
         itemUrl: "/",
       },
       {
         id: 26,
-        imageUrl: accessoriesImg4,
-        caption: "Mobiles",
+        imageUrl: techImg4,
+        caption: "Watches",
         itemUrl: "/",
       },
     ],
-    discoverMoreText: "Shop Accessories",
+    discoverMoreText: "Discover more",
     discoverMoreUrl: "/",
   },
 ];

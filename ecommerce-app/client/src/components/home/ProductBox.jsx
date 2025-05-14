@@ -39,7 +39,7 @@ export default function ProductBox({
   // and to prevent errors if more items are accidentally passed.
 
   return (
-    <div className="bg-white p-4 sm:p-5 flex flex-col h-full shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out rounded-md z-10 ">
+    <div className="bg-white p-4 sm:p-5 flex flex-col h-full shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out z-10 ">
       <h2 className="text-lg sm:text-xl font-bold mb-4 text-gray-800">
         {title}
       </h2>
@@ -54,7 +54,7 @@ export default function ProductBox({
             className="group cursor-pointer no-underline block"
             aria-label={`View ${displayItems[0].caption}`}
           >
-            <div className="aspect-video sm:aspect-[4/3] bg-gray-100 overflow-hidden rounded-sm group-hover:shadow-md transition-shadow duration-200 mb-2 ">
+            <div className="aspect-video sm:aspect-[4/3] bg-gray-100 overflow-hidden  group-hover:shadow-md transition-shadow duration-200 mb-2 ">
               <img
                 src={displayItems[0].imageUrl}
                 alt={displayItems[0].caption}
@@ -76,7 +76,7 @@ export default function ProductBox({
                 className="group cursor-pointer no-underline"
                 aria-label={`View ${item.caption}`}
               >
-                <div className="aspect-square bg-gray-100 overflow-hidden rounded-sm group-hover:shadow-md transition-shadow duration-200">
+                <div className="aspect-square bg-gray-100 overflow-hidden  group-hover:shadow-md transition-shadow duration-200">
                   <img
                     src={item.imageUrl}
                     alt={item.caption ? item.caption : ""}

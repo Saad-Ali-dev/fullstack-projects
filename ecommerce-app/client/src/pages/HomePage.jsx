@@ -26,8 +26,8 @@ export default function HomePage() {
       <div>
         <HeroSlider />
       </div>
-      <div className="relative top-[-10rem] sm:top-[-12rem] md:top-[-18rem] lg:top-[-22rem]">
-        <div className="grid grid-cols-1 custom-grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4 ">
+      <div className="relative z-10 -mt-40 sm:-mt-48 md:-mt-72 lg:-mt-88">
+        <div className="grid grid-cols-1 custom-grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4 max-w-screen-xl mx-auto">
           {data.map((section) => (
             <ProductBox
               key={section.id}
@@ -38,12 +38,11 @@ export default function HomePage() {
             />
           ))}
         </div>
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto px-4">
           <ProductCarousel
             title="Additional items to explore"
             items={shoeProducts}
-            seeMoreLink="/shoes/all" // Optional: link for "See more"
-            // seeMoreText="View all shoes" // Optional: custom text for "See more"
+            seeMoreLink="/shoes/all"
           />
         </div>
       </div>

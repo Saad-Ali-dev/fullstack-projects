@@ -1,19 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 
-/**
- * A responsive product carousel component.
- *
- * To hide the scrollbar, add the following to your global CSS:
- * .no-scrollbar::-webkit-scrollbar {
- *   display: none;
- * }
- * .no-scrollbar {
- *   -ms-overflow-style: none;  // IE and Edge
- *   scrollbar-width: none;  // Firefox
- * }
- * Or use the `tailwind-scrollbar-hide` plugin.
- */
 const ProductCarousel = ({
   title,
   items,
@@ -102,7 +89,7 @@ const ProductCarousel = ({
   }
 
   return (
-    <div className="py-4 bg-white shadow-md rounded-md">
+    <div className="my-10 py-4 px-10 bg-white shadow-md ">
       {/* Header Section: Title and "See more" link */}
       {title && (
         <div className="flex items-baseline justify-between mb-3 px-1 sm:px-0">
