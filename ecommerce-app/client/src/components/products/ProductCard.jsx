@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 import Rating from "../common/Rating";
+import {
+  formattedDeliveryDate,
+  formattedFastestDeliveryDate,
+} from "../../deliveryDate.js";
 
 export default function ProductCard({ product }) {
   if (!product) {
-    return null; // Or some placeholder/error display
+    return null;
   }
 
   // Ensure essential product data exists
@@ -13,29 +17,6 @@ export default function ProductCard({ product }) {
   const ratingAvg = product.ratings?.avg ?? 0;
   const price = product.price ?? 0;
   const productId = product.id;
-
-  // --- Date Calculation Logic ---
-  const currentDate = new Date();
-
-  // Calculate Delivery Date (Current Date + 7 days)
-  const deliveryDate = new Date(currentDate.getTime()); // Clone current date
-  deliveryDate.setDate(currentDate.getDate() + 7);
-
-  // Calculate Fastest Delivery Date (Current Date + 3 days)
-  const fastestDeliveryDate = new Date(currentDate.getTime()); // Clone current date
-  fastestDeliveryDate.setDate(currentDate.getDate() + 3);
-
-  // Format Dates
-  const options = { weekday: "short", month: "short", day: "numeric" };
-  const formattedDeliveryDate = deliveryDate.toLocaleDateString(
-    "en-US",
-    options,
-  );
-  const formattedFastestDeliveryDate = fastestDeliveryDate.toLocaleDateString(
-    "en-US",
-    options,
-  );
-  // --- End Date Calculation Logic ---
 
   return (
     <Link

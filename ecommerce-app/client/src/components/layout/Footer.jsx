@@ -18,12 +18,12 @@ export default function Footer() {
         </p>
         {/* You can add more links or information here */}
         <div className="mt-4">
-          <div
+          <button
             onClick={scrollToTop}
             className="text-gray-300 hover:text-white px-3"
           >
             Back to top
-          </div>
+          </button>
         </div>
       </div>
     </footer>
