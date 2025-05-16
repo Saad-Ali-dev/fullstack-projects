@@ -1,23 +1,25 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
+import connectDB from "./db/connectDB.js";
+import app from "./app.js";
 
-
-dotenv.config();
-const app = express();
-
-app.use(express.json());
-app.use(cors());
-
-
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error(err));
-
-app.get('/', (req, res) => {
-  res.send('Hello E-commerce API');
+dotenv.config({
+  path: "../.env",
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+const startServer = async () => {
+  try {
+    await connectDB();
+    console.log("MongoDB connected successfully");
+
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Error connecting to database or starting server:", error);
+    process.exit(1);
+  }
+};
+
+startServer();
