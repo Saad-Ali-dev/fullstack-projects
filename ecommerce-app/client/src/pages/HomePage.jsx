@@ -42,7 +42,7 @@ export default function HomePage() {
           <ProductCarousel
             title="Additional items to explore"
             items={shoeProducts}
-            seeMoreLink="/shoes/all"
+            seeMoreLink="/products/category/shoes"
           />
         </div>
       </div>

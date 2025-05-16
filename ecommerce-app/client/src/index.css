@@ -41,3 +41,10 @@ body {
     width: 90%;
   }
 }
+
+@media (min-width: 500px) and (max-width: 640px) {
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

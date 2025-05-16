@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { CgProfile } from "react-icons/cg";
 import { IoCloseCircle } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 export default function SideBar({ isOpen, onClose }) {
   // Prevent background scroll when sidebar is open
@@ -58,54 +59,30 @@ export default function SideBar({ isOpen, onClose }) {
               <ul>
                 {[
                   "Electronics",
-                  "Computers",
-                  "Smart Home",
-                  "Arts & Crafts",
+                  "Home",
+                  "Kitchen",
+                  "Beauty",
+                  "Clothing",
+                  "Shoes",
+                  "Watches",
                 ].map((item) => (
-                  <li
+                  <Link
+                    to={`/products/category/${item.toLowerCase()}`}
                     key={item}
-                    className="py-2.5 px-2 hover:bg-gray-100 rounded-md cursor-pointer text-gray-700 text-sm"
                   >
-                    {item} <span className="float-right">›</span>
-                  </li>
+                    <li
+                      key={item}
+                      onClick={onClose}
+                      className="py-2.5 px-2 hover:bg-gray-100 rounded-md cursor-pointer text-gray-700 text-sm"
+                    >
+                      {item} <span className="float-right">›</span>
+                    </li>
+                  </Link>
                 ))}
-                <li className="py-2.5 px-2 hover:bg-gray-100 rounded-md cursor-pointer text-gray-700 text-sm">
-                  See all{" "}
-                  <span className="inline-block transform transition-transform duration-200 ease-in-out group-hover:rotate-180">
-                    ▾
-                  </span>
-                </li>
               </ul>
             </section>
 
             <div className="border-t border-gray-200 my-3"></div>
-
-            <section>
-              <h3 className="text-lg font-semibold text-gray-800 pt-2 pb-1">
-                Programs & Features
-              </h3>
-              <ul>
-                {[
-                  "Gift Cards",
-                  "Shop By Interest",
-                  "Amazon Live",
-                  "International Shopping",
-                ].map((item) => (
-                  <li
-                    key={item}
-                    className="py-2.5 px-2 hover:bg-gray-100 rounded-md cursor-pointer text-gray-700 text-sm"
-                  >
-                    {item} <span className="float-right">›</span>
-                  </li>
-                ))}
-                <li className="py-2.5 px-2 hover:bg-gray-100 rounded-md cursor-pointer text-gray-700 text-sm">
-                  See all{" "}
-                  <span className="inline-block transform transition-transform duration-200 ease-in-out group-hover:rotate-180">
-                    ▾
-                  </span>
-                </li>
-              </ul>
-            </section>
           </nav>
         </div>
       </aside>
