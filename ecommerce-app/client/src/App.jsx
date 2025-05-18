@@ -45,11 +45,6 @@ export default function App() {
             <Route path="/payment-success" element={<PaymentSuccessPage />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
-          {/* Define other routes here as components are built:
-          <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/profile" element={<UserProfilePage />} />
-          <Route path="/orders" element={<OrderHistoryPage />} />
-          */}
         </Routes>
       </div>
     </Router>

@@ -12,17 +12,17 @@ export default function ProductsPage() {
 
   // Get search parameters from the query string
   const [searchParams] = useSearchParams();
-  const searchQuery = searchParams.get("q"); // Get the 'q' query parameter
+  const searchQuery = searchParams.get("q");
 
   // Determine the current context (category or search)
-  const isCategoryPage = !!category; // true if category param exists
-  const isSearchPage = !!searchQuery; // true if 'q' query param exists
+  const isCategoryPage = !!category;
+  const isSearchPage = !!searchQuery;
 
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
       setError(null);
-      setProducts([]); // Clear previous results
+      setProducts([]);
       try {
         let response;
         let fetchSuccessful = false;
@@ -35,12 +35,10 @@ export default function ProductsPage() {
           console.log(response.data);
         } else if (isSearchPage) {
           // Fetch by search query if 'q' param is present
-          // Added trim() to handle spaces-only queries
           const trimmedSearchQuery = searchQuery.trim();
           if (!trimmedSearchQuery) {
-            // Handle empty search query explicitly - show no results immediately
             setLoading(false);
-            return; // Stop execution
+            return;
           }
           console.log(`Searching for products: ${trimmedSearchQuery}`);
           response = await axios.get(`/api/products/search`, {
@@ -56,7 +54,6 @@ export default function ProductsPage() {
           setProducts(productsArray);
           fetchSuccessful = true;
         } else {
-          // Handle backend specific errors if success is false but status is 200
           setError({
             message:
               response.data.message || "An error occurred on the server.",

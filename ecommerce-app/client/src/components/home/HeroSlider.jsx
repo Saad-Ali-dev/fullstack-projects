@@ -55,7 +55,7 @@ export default function HeroSlider() {
 
     // Clear interval on component unmount to prevent memory leaks
     return () => clearInterval(timer);
-  }, [goToNext]); // Dependency array includes goToNext
+  }, [goToNext]);
 
   return (
     <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden group">
@@ -71,7 +71,7 @@ export default function HeroSlider() {
             <img
               src={image.src}
               alt={image.alt}
-              className="w-full h-full object-cover" // 'object-cover' ensures the image covers the area, might crop
+              className="w-full h-full object-cover"
             />
             {/* Gradient Overlay: transparent at top, fading to white at bottom */}
             <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0)_0%,rgba(255,255,255,0)_75%,rgba(255,255,255,1)_100%)]"></div>

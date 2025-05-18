@@ -24,7 +24,6 @@ export default function SearchBar() {
             <div className="ml-1 text-gray-500">
               <FaCaretDown />
             </div>{" "}
-            {/* Dropdown Icon */}
           </button>
           {/* Search Input */}
           <input
@@ -43,7 +42,6 @@ export default function SearchBar() {
             <div className=" text-xl text-gray-800">
               <FaSearch />
             </div>{" "}
-            {/* Search Icon */}
           </button>
         </form>
       </div>

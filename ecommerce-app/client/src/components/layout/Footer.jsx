@@ -1,6 +1,3 @@
-// client/src/components/Footer.jsx
-import React from "react";
-
 export default function Footer() {
   // Function to scroll to the top of the page
   const scrollToTop = () => {
@@ -13,10 +10,8 @@ export default function Footer() {
         <p className="text-sm">
           © {new Date().getFullYear()} Amazon Clone. All rights reserved.
         </p>
-        <p className="text-xs mt-2">
-          This is a portfolio project and not affiliated with Amazon.
-        </p>
-        {/* You can add more links or information here */}
+        <p className="text-xs mt-2">This is a portfolio project.</p>
+        <p className="text-xl mt-2">Created with 💖 by Saad Ali</p>
         <div className="mt-4">
           <button
             onClick={scrollToTop}

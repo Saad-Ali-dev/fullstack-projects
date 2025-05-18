@@ -58,7 +58,6 @@ const LoginPage = () => {
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-screen">
       {" "}
-      {/* Adjust min-height based on header/footer */}
       <div className="w-full min-h-screen max-w-md p-8 space-y-6 bg-white shadow-lg rounded-lg">
         <img
           src={logo}
@@ -109,7 +108,7 @@ const LoginPage = () => {
             />
             {/* Password visibility toggle icon */}
             <div
-              className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-gray-500 top-[calc(1rem+14px+14px)] transform -translate-y-1/2" // Position correctly beside the input
+              className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-gray-500 top-[calc(1rem+14px+14px)] transform -translate-y-1/2"
               onClick={togglePasswordVisibility}
             >
               {showPassword ? (

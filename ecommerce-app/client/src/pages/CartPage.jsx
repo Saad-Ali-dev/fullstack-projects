@@ -19,9 +19,8 @@ const CartPage = () => {
 
   const handleUpdateQuantity = (id, quantity) => {
     const newQuantity = parseInt(quantity, 10);
-    if (isNaN(newQuantity)) return; // Should not happen with type="number"
+    if (isNaN(newQuantity)) return;
 
-    // The reducer already handles removing the item if quantity <= 0
     dispatch({
       type: "UPDATE_QUANTITY",
       payload: { id, quantity: newQuantity },
@@ -59,7 +58,7 @@ const CartPage = () => {
           title: item.title,
           price: item.price,
           quantity: item.quantity,
-          image: item.image, // Send image for Stripe display
+          image: item.image,
         })),
       };
 
@@ -96,7 +95,7 @@ const CartPage = () => {
               Looks like you haven't added anything to your cart yet.
             </p>
             <Link
-              to="/" // Link to homepage or products page
+              to="/"
               className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-3 px-6 rounded-md shadow-md transition duration-150"
             >
               Continue Shopping

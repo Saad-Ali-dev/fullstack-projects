@@ -32,7 +32,7 @@ const ProductCarousel = ({
       setShowPrevButton(false);
       setShowNextButton(false);
     }
-  }, []); // No dependencies, relies on ref.current for DOM properties
+  }, []);
 
   useEffect(() => {
     const container = scrollContainerRef.current;
@@ -56,7 +56,7 @@ const ProductCarousel = ({
       container.removeEventListener("scroll", checkButtonVisibility);
       window.removeEventListener("resize", checkButtonVisibility);
     };
-  }, [items, checkButtonVisibility]); // Re-run effect if items array or checkButtonVisibility function changes
+  }, [items, checkButtonVisibility]);
 
   const handleScroll = (direction) => {
     if (!scrollContainerRef.current) return;
@@ -69,7 +69,6 @@ const ProductCarousel = ({
     } else {
       scrollContainerRef.current.scrollLeft += scrollAmount;
     }
-    // The 'scroll' event on the container will automatically trigger checkButtonVisibility
   };
 
   // Handle cases where there are no items to display
@@ -110,23 +109,21 @@ const ProductCarousel = ({
       {/* Carousel Section */}
       <div className="relative group">
         {" "}
-        {/* group class for potential group-hover states on buttons if needed */}
         {/* Scrollable Item Container */}
         <div
           ref={scrollContainerRef}
           className="flex overflow-x-auto scroll-smooth py-2 space-x-3 sm:space-x-4 no-scrollbar"
-          // Add 'no-scrollbar' class (defined in global CSS) to hide scrollbar
         >
           {items.map((item, index) => (
             <div
-              key={item.id || index} // Prefer item.id if available, fallback to index
-              className="flex-shrink-0 w-36 h-36 sm:w-40 sm:h-40 md:w-48 md:h-48" // Responsive item sizes
+              key={item.id || index}
+              className="flex-shrink-0 w-36 h-36 sm:w-40 sm:h-40 md:w-48 md:h-48"
             >
               <img
                 src={item.imageUrl}
                 alt={item.altText || `Item ${index + 1}`}
-                className="w-full h-full object-contain" // Ensures image fits well
-                loading="lazy" // Improves performance for off-screen images
+                className="w-full h-full object-contain"
+                loading="lazy"
               />
             </div>
           ))}

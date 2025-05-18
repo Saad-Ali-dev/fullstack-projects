@@ -8,35 +8,8 @@ export default function ProductBox({
   discoverMoreText,
   discoverMoreUrl,
 }) {
-  // Developer-friendly warning for incorrect number of items.
-  // The component will still attempt to render with what's provided,
-  // allowing developers to visually identify issues caused by incorrect data.
-  if (process.env.NODE_ENV === "development") {
-    if (!items || !Array.isArray(items) || items.length === 0) {
-      console.warn(
-        `ProductBox component (title: "${title}"): 'items' prop is missing, not an array, or empty. ` +
-          `Expected an array of 1 item (for single display) or 2-4 items (for grid display). Received ${items ? items.length : typeof items}.`,
-      );
-    } else if (items.length > 4) {
-      console.warn(
-        `ProductBox component (title: "${title}"): Received ${items.length} items. ` +
-          `Only the first item will be used for a single-item layout, or the first 4 for a grid layout.`,
-      );
-    } else if (items.length > 1 && items.length < 4) {
-      // This is a soft warning, as the grid will still render but might look sparse.
-      console.info(
-        `ProductBox component (title: "${title}"): Received ${items.length} items for grid display. ` +
-          `The grid layout is optimal for 4 items. With ${items.length} items, the grid may appear incomplete.`,
-      );
-    }
-  }
-
   const displayItems = Array.isArray(items) ? items : [];
   const itemCount = displayItems.length;
-
-  // Gracefully handle cases where items might be null/undefined or not an array.
-  // Use slice(0, 4) to ensure we don't attempt to map over more than 4 items for the grid,
-  // and to prevent errors if more items are accidentally passed.
 
   return (
     <div className="bg-white p-4 sm:p-5 flex flex-col h-full shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out z-10 ">
@@ -44,7 +17,7 @@ export default function ProductBox({
         {title}
       </h2>
 
-      {/* NEW DYNAMIC ITEMS RENDERING SECTION */}
+      {/* DYNAMIC ITEMS RENDERING SECTION */}
       <div className="flex-grow">
         {itemCount === 1 && displayItems[0] ? (
           // Single Item Layout
@@ -91,13 +64,11 @@ export default function ProductBox({
             ))}
           </div>
         ) : (
-          // Fallback for 0 items (though warning should catch this)
+          // Fallback for 0 items
           <p className="text-sm text-gray-500">No items to display.</p>
         )}
       </div>
-      {/* END OF NEW DYNAMIC ITEMS RENDERING SECTION */}
-      {/* 'mt-auto' pushes this link section to the bottom of the card, ensuring consistent placement
-            when cards are in a row and have h-full (equal height). */}
+      {/* DISCOVER MORE LINK */}
       <div className="mt-auto pt-3 sm:pt-4">
         <Link
           to={discoverMoreUrl}

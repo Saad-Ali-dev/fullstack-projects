@@ -48,10 +48,8 @@ export default function ProductDetailPage() {
   }, [productId]); // Refetch if productId changes
 
   useEffect(() => {
-    // Add the "no-bg" class on mount
     document.body.classList.add("no-bg");
     return () => {
-      // Remove the "no-bg" class on unmount, restore body background
       document.body.classList.remove("no-bg");
     };
   }, []);
@@ -84,12 +82,12 @@ export default function ProductDetailPage() {
       payload: {
         id: product.id,
         title: product.title,
-        price: product.price, // Current selling price per unit
+        price: product.price,
         image: itemImage,
-        quantity: quantity, // Use the state's quantity
+        quantity: quantity,
         stock: product.stock,
-        offer: product.offer, // Pass offer details
-        listPrice: originalPrice, // Pass original/list price
+        offer: product.offer,
+        listPrice: originalPrice,
       },
     });
     toast.success(`${product.title} added to cart!`, {
@@ -119,16 +117,16 @@ export default function ProductDetailPage() {
       </div>
     );
 
-  // Helper function to convert camelCase to Title Case (optional, but good for display)
+  // Helper function to convert camelCase to Title Case
   const toTitleCase = (str) => {
     const result = str.replace(/([A-Z])/g, " $1");
     return result.charAt(0).toUpperCase() + result.slice(1);
   };
 
-  // Filter specifications for display (optional, remove if all are desired)
+  // Filter specifications for display
   const productInfoSpecs = product.attributes
     ? Object.entries(product.attributes).map(([key, value]) => ({
-        key: toTitleCase(key), // Use helper function for better key display
+        key: toTitleCase(key),
         value: value,
       }))
     : [];

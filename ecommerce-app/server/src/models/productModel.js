@@ -1,14 +1,9 @@
-// File: models/productModel.js
-
 import mongoose from "mongoose";
 
-const offerSchema = new mongoose.Schema(
-  {
-    status: { type: Boolean, default: false },
-    percentage: { type: Number, default: 0 },
-  },
-  { _id: false }, // Prevents _id generation for subdocuments if not needed
-);
+const offerSchema = new mongoose.Schema({
+  status: { type: Boolean, default: false },
+  percentage: { type: Number, default: 0 },
+});
 
 const ratingsSchema = new mongoose.Schema(
   {
@@ -25,7 +20,6 @@ const productSchema = new mongoose.Schema(
     description: { type: String, required: true, trim: true },
     price: { type: Number, required: true },
     // Indexing 'category' for efficient querying by category.
-    // MongoDB will create a multikey index if 'category' is an array.
     category: { type: [String], required: true, index: true },
     images: { type: [String], required: true },
     brand: { type: String, required: true, trim: true },
@@ -43,18 +37,9 @@ const productSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // Automatically adds createdAt and updatedAt fields
+    timestamps: true,
   },
 );
-
-// Regarding the text index from `database-index.txt`:
-// While Mongoose can create text indexes, compound text indexes with specific weights
-// are often best managed directly in MongoDB shell or via a migration script.
-// The schema above defines individual indexes for `category` and `id` which are
-// optimal for the `getProductsByCategory` and `getProductById` controllers.
-// You can still create the 'ProductTextIndex' in MongoDB for broader search functionalities.
-// e.g., productSchema.index({ name: "text", title: "text", ... }, { weights: { ... } });
-// For simplicity and directness for the current task, individual indexes are sufficient.
 
 const Product = mongoose.model("Product", productSchema);
 

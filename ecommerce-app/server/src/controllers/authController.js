@@ -73,11 +73,9 @@ export const registerUser = async (req, res) => {
           console.error(
             `Failed to send welcome email to ${newUser.email}: ${emailResult.error}`,
           );
-          // You might want to log this to a more persistent error tracking service
         }
       })
       .catch((emailError) => {
-        // Catch any unexpected errors from sendEmail promise itself
         console.error(
           `Unexpected error sending welcome email to ${newUser.email}:`,
           emailError,
@@ -96,7 +94,6 @@ export const registerUser = async (req, res) => {
     });
   } catch (error) {
     console.error("Error during registration:", error);
-    // Handle specific MongoDB duplicate key error for email, though explicit check is better
     if (error.code === 11000) {
       return res
         .status(400)
@@ -126,13 +123,13 @@ export const loginUser = async (req, res) => {
 
     // Check if User Found
     if (!user) {
-      return res.status(401).json({ message: "Invalid credentials." }); // Use 401 for auth failure
+      return res.status(401).json({ message: "Invalid credentials." });
     }
 
     // Validate Password
     const isCorrectPassword = await bcrypt.compare(password, user.password);
     if (!isCorrectPassword) {
-      return res.status(401).json({ message: "Invalid credentials." }); // Use 401
+      return res.status(401).json({ message: "Invalid credentials." });
     }
 
     // Prepare response data (excluding password)

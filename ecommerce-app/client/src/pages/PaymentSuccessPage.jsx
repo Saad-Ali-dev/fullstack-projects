@@ -1,7 +1,6 @@
-// client/src/pages/PaymentSuccessPage.jsx
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useCart } from "../context/CartContext"; // Assuming you have this
+import { useCart } from "../context/CartContext";
 import { FaCheckCircle } from "react-icons/fa";
 
 const PaymentSuccessPage = () => {
@@ -10,8 +9,6 @@ const PaymentSuccessPage = () => {
   useEffect(() => {
     // Clear the cart on successful payment
     dispatch({ type: "CLEAR_CART" });
-    // You might want to also save the order to your backend here
-    // For this basic example, we are just clearing the cart.
   }, [dispatch]);
 
   return (
@@ -30,13 +27,6 @@ const PaymentSuccessPage = () => {
         >
           Continue Shopping
         </Link>
-        {/* Optionally, link to an order history page if you implement one */}
-        {/* <Link
-          to="/orders"
-          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-md shadow-md transition duration-150"
-        >
-          View Orders
-        </Link> */}
       </div>
     </div>
   );

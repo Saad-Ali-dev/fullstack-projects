@@ -1,11 +1,10 @@
-// client/src/pages/SignupPage.jsx
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import BackToHome from "../components/common/BackToHome";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Import toast styles
+import "react-toastify/dist/ReactToastify.css";
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -20,6 +19,7 @@ const SignupPage = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const { name, email, password, confirmPassword } = formData;
@@ -64,12 +64,11 @@ const SignupPage = () => {
       const signupData = { name, email, password };
       const response = await axios.post(`api/auth/register`, signupData);
 
-      // Option 1: Automatically log in the user by storing token and user data
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
-      // TODO: Update global auth state if using Context API
+
       setLoading(false);
-      navigate("/"); // Redirect to home
+      navigate("/");
       toast.success("Account created successfully!");
     } catch (err) {
       setLoading(false);
@@ -83,8 +82,6 @@ const SignupPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-screen">
-      {" "}
-      {/* Adjust min-height based on header/footer */}
       <div className="w-full max-w-md p-8 space-y-6 bg-white shadow-lg rounded-lg">
         <h2 className="text-2xl font-bold text-center text-gray-800">
           Create Account
@@ -103,7 +100,7 @@ const SignupPage = () => {
               id="name"
               value={name}
               onChange={onChange}
-              disabled={loading} // Disable input while loading
+              disabled={loading}
               required
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="First and last name"
@@ -149,7 +146,7 @@ const SignupPage = () => {
             />
             {/* Password visibility toggle icon */}
             <div
-              className="absolute right-3 top-[calc(1rem+14px+14px)] transform -translate-y-1/2 flex items-center cursor-pointer text-gray-500" // Position correctly
+              className="absolute right-3 top-[calc(1rem+14px+14px)] transform -translate-y-1/2 flex items-center cursor-pointer text-gray-500"
               onClick={togglePasswordVisibility}
             >
               {showPassword ? (
@@ -167,7 +164,7 @@ const SignupPage = () => {
               Re-enter password
             </label>
             <input
-              type={showConfirmPassword ? "text" : "password"} // Toggle type
+              type={showConfirmPassword ? "text" : "password"}
               name="confirmPassword"
               id="confirmPassword"
               value={confirmPassword}
@@ -179,7 +176,7 @@ const SignupPage = () => {
             />
             {/* Confirm Password visibility toggle icon */}
             <div
-              className="absolute right-3 top-[calc(1rem+14px+14px)] transform -translate-y-1/2 flex items-center cursor-pointer text-gray-500" // Position correctly
+              className="absolute right-3 top-[calc(1rem+14px+14px)] transform -translate-y-1/2 flex items-center cursor-pointer text-gray-500"
               onClick={toggleConfirmPasswordVisibility}
             >
               {showConfirmPassword ? (
@@ -192,7 +189,7 @@ const SignupPage = () => {
           <div>
             <button
               type="submit"
-              disabled={loading} // Disable button while loading
+              disabled={loading}
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-900  bg-yellow-400  hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#fce444] transition cursor-pointer"
             >
               {loading ? "Creating Account..." : "Create your Amazon account"}

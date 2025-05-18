@@ -1,4 +1,3 @@
-// src/context/CartContext.js
 import React, { createContext, useReducer, useContext, useEffect } from "react";
 
 // Initial state - Load from localStorage if available
@@ -19,7 +18,7 @@ const cartReducer = (state, action) => {
         // Item exists, update quantity
         const updatedCart = state.cart.map((item, index) =>
           index === existingItemIndex
-            ? { ...item, quantity: item.quantity + (newItem.quantity || 1) } // Ensure quantity is added, default to 1
+            ? { ...item, quantity: item.quantity + (newItem.quantity || 1) }
             : item,
         );
         return { ...state, cart: updatedCart };
@@ -31,7 +30,7 @@ const cartReducer = (state, action) => {
             ...state.cart,
             { ...newItem, quantity: newItem.quantity || 1 },
           ],
-        }; // Ensure quantity is set, default to 1
+        };
       }
 
     case "REMOVE_FROM_CART":
@@ -76,12 +75,12 @@ export const CartProvider = ({ children }) => {
   // Effect to save cart state to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(state.cart));
-  }, [state.cart]); // Depend on state.cart
+  }, [state.cart]);
 
   // Value provided to consumers
   const contextValue = {
     cart: state.cart,
-    dispatch, // Provide the dispatch function to trigger state changes
+    dispatch,
   };
 
   return (

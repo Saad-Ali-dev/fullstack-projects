@@ -17,10 +17,9 @@ const getProductsByCategory = async (req, res) => {
     }
 
     // Perform a case-insensitive search for the category name within the 'category' array.
-    // The regex '^${categoryName}$' ensures an exact match of the category string within the array.
     const products = await Product.find({
       category: { $regex: new RegExp(`^${categoryName}$`, "i") },
-    }).lean(); // .lean() returns plain JS objects for better performance in read-only ops
+    }).lean();
 
     const message =
       products.length > 0
@@ -41,7 +40,7 @@ const getProductsByCategory = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Server error while fetching products by category.",
-      error: error.message, // Consider omitting detailed error in production
+      error: error.message,
     });
   }
 };
@@ -83,7 +82,7 @@ const getProductById = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Server error while fetching product by ID.",
-      error: error.message, // Consider omitting detailed error in production
+      error: error.message,
     });
   }
 };
@@ -98,7 +97,6 @@ async function searchProducts(searchQuery) {
     const queryText = searchQuery.trim();
 
     // Build the base query object
-    // $text operator is your primary tool for using the text index
     const baseQuery = {
       $text: {
         $search: queryText,
@@ -129,7 +127,7 @@ async function searchProducts(searchQuery) {
     return products;
   } catch (error) {
     console.error("Error during product search:", error);
-    throw error; // Re-throw or handle appropriately
+    throw error;
   }
 }
 /**
@@ -139,7 +137,7 @@ async function searchProducts(searchQuery) {
  */
 const handleSearchProducts = async (req, res) => {
   try {
-    const searchQuery = req.query.q; // Get the 'q' query parameter
+    const searchQuery = req.query.q; // Get the query parameter
 
     if (!searchQuery || searchQuery.trim() === "") {
       return res.status(200).json({
@@ -150,7 +148,7 @@ const handleSearchProducts = async (req, res) => {
       });
     }
 
-    const products = await searchProducts(searchQuery); // Use the existing helper function
+    const products = await searchProducts(searchQuery);
 
     const message =
       products.length > 0
@@ -171,7 +169,7 @@ const handleSearchProducts = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Server error while performing search.",
-      error: process.env.NODE_ENV === "production" ? undefined : error.message, // Conditionally omit detailed error
+      error: process.env.NODE_ENV === "production" ? undefined : error.message,
     });
   }
 };

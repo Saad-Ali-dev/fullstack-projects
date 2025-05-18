@@ -1,13 +1,11 @@
 import { IoMdStar, IoMdStarOutline, IoMdStarHalf } from "react-icons/io";
 
 export default function Rating({ stars, size = 20 }) {
-  // Ensure stars is a number
   const ratingValue = Number(stars);
 
   // Calculate the number of full stars
   const fullStars = Math.floor(ratingValue);
 
-  // Determine if a half star is needed
   // A half star is needed if the decimal part is 0.5 or more
   const hasHalfStar = ratingValue - fullStars >= 0.5;
 

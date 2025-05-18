@@ -1,6 +1,5 @@
-// Reusable PriceDisplay Component
 export default function PriceDisplay({ product, context }) {
-  // NEW: Determine discount and listPrice based on product.offer
+  //  Determine discount and listPrice based on product.offer
   let discountPercentage = 0;
   let calculatedListPrice = null;
 
@@ -26,8 +25,8 @@ export default function PriceDisplay({ product, context }) {
 
   if (context === "mobile") {
     dollarSignSize = "text-base";
-    priceSize = "text-2xl"; // Main price numbers
-    centsSize = "text-base"; // Cents for mobile
+    priceSize = "text-2xl";
+    centsSize = "text-base";
     discountTextSize = "text-xl";
     listPriceTextSize = "text-sm";
   } else if (context === "desktop-info") {
@@ -37,7 +36,6 @@ export default function PriceDisplay({ product, context }) {
     discountTextSize = "text-2xl";
     listPriceTextSize = "text-sm";
   }
-  // 'desktop-action' uses the default sizes (suitable for the smaller action box)
 
   return (
     <div className="mb-1">
@@ -86,10 +84,4 @@ export default function PriceDisplay({ product, context }) {
       )}
     </div>
   );
-} // PriceDisplay.propTypes = {
-//   product: PropTypes.shape({
-//     price: PropTypes.number.isRequired,
-//     listPrice: PropTypes.number,
-//   }).isRequired,
-//   context: PropTypes.oneOf(["mobile", "desktop-info", "desktop-action"]),
-// };
+}
