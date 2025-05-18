@@ -1,10 +1,10 @@
-// client/src/pages/LoginPage.jsx
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import BackToHome from "../components/common/BackToHome";
 import logo from "../assets/amazon-logo.png";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -42,12 +42,16 @@ const LoginPage = () => {
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.data)); // Store user info
       setLoading(false);
+      toast.success("Login successful!");
       navigate("/"); // Redirect to home or dashboard
     } catch (error) {
-      setError(
-        err.response?.data?.message || "Login failed. Please try again.",
-      );
-      console.error("Login failed:", err.response?.data || err.message);
+      const errorMessage =
+        error.response?.data?.message ||
+        "Login failed. Please check your credentials and try again.";
+      toast.error(errorMessage);
+      setError(errorMessage);
+      console.error("Login failed:", error.response?.data || error.message);
+      setLoading(false);
     }
   };
 
@@ -129,7 +133,7 @@ const LoginPage = () => {
         <p className="mt-4 text-center text-sm text-gray-600">
           New to Amazon Clone?{" "}
           <Link
-            to="/signup"
+            to="/register"
             className="font-medium text-indigo-600 hover:text-indigo-500"
           >
             Create your Amazon Clone account

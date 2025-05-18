@@ -45,7 +45,7 @@ export default function Header() {
           <SearchBar />
           {/* Sign Up / Log In Buttons */}
           <div className="flex items-center space-x-3 flex-shrink-0 px-2">
-            <Link to="/signup">
+            <Link to="/register">
               <button className="text-gray-900 text-sm font-semibold py-2 px-4 rounded-md whitespace-nowrap bg-[#ffa621] hover:bg-[#f3c547] transition cursor-pointer hidden md:block">
                 Sign Up
               </button>
@@ -56,7 +56,7 @@ export default function Header() {
               </button>
             </Link>
             {/* Cart Component */}
-            <Cart itemCount={5} />
+            <Cart />
           </div>
         </nav>
       </header>

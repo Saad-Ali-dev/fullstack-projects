@@ -20,7 +20,7 @@ export default function ProductCard({ product }) {
 
   return (
     <Link
-      to={`/product/${productId}`}
+      to={`/products/${productId}`}
       className="block border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 bg-white"
     >
       <div className="w-full aspect-square overflow-hidden flex items-center justify-center">

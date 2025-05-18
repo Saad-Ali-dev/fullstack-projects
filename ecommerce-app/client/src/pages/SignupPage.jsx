@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import BackToHome from "../components/common/BackToHome";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Import toast styles
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -65,14 +67,16 @@ const SignupPage = () => {
       // Option 1: Automatically log in the user by storing token and user data
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
-      // TODO: Update global auth state if using Context API or Redux/Zustand
+      // TODO: Update global auth state if using Context API
       setLoading(false);
       navigate("/"); // Redirect to home
+      toast.success("Account created successfully!");
     } catch (err) {
       setLoading(false);
-      setError(
-        err.response?.data?.message || "Signup failed. Please try again.",
-      );
+      const errorMessage =
+        err.response?.data?.message || "Signup failed. Please try again.";
+      toast.error(errorMessage);
+      setError(errorMessage);
       console.error("Signup failed:", err.response?.data || err.message);
     }
   };

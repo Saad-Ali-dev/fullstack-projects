@@ -8,6 +8,8 @@ import {
   formattedDeliveryDate,
   formattedFastestDeliveryDate,
 } from "../deliveryDate";
+import { useCart } from "../context/CartContext";
+import { toast } from "react-toastify";
 
 export default function ProductDetailPage() {
   const { productId } = useParams();
@@ -17,11 +19,13 @@ export default function ProductDetailPage() {
   const [selectedImage, setSelectedImage] = useState("");
   const [quantity, setQuantity] = useState(1);
 
+  const { dispatch } = useCart(); // Get the dispatch function
+
   useEffect(() => {
     const fetchProduct = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`/api/product/${productId}`);
+        const response = await axios.get(`/api/products/${productId}`);
         const data = response.data.data;
         setProduct(data);
         if (data.images && data.images.length > 0) {
@@ -57,12 +61,46 @@ export default function ProductDetailPage() {
   };
 
   const handleAddToCart = () => {
-    // This is a placeholder. Implement your actual cart logic here.
-    // e.g., dispatch an action to a context/redux store, or call a cart API.
-    console.log(
-      `Added ${quantity} of ${product.title} (ID: ${product._id}) to cart.`,
-    );
-    alert(`${quantity} x "${product.title}" added to cart! (This is a demo)`);
+    if (!product) return;
+
+    let originalPrice = product.listPrice;
+    if (
+      !originalPrice &&
+      product.offer &&
+      product.offer.status &&
+      product.offer.percentage > 0
+    ) {
+      originalPrice = product.price / (1 - product.offer.percentage / 100);
+    }
+    originalPrice = originalPrice || product.price; // Fallback if no listPrice or offer
+
+    const itemImage =
+      (product.images && product.images.length > 0
+        ? product.images[0]
+        : product.thumbnail) || "https://via.placeholder.com/150?text=No+Image"; // Fallback image
+
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: {
+        id: product.id,
+        title: product.title,
+        price: product.price, // Current selling price per unit
+        image: itemImage,
+        quantity: quantity, // Use the state's quantity
+        stock: product.stock,
+        offer: product.offer, // Pass offer details
+        listPrice: originalPrice, // Pass original/list price
+      },
+    });
+    toast.success(`${product.title} added to cart!`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   if (loading) return <Spinner />;

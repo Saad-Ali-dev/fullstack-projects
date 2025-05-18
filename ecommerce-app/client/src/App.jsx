@@ -10,11 +10,10 @@ import checkServerStatus from "./checkServerStatus.js";
 import ScrollToTop from "./components/common/ScrollToTop";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import ErrorPage from "./pages/ErrorPage";
-// Import other pages as they are created, e.g.:
-// import CartPage from './pages/CartPage';
-// import CheckoutPage from './pages/CheckoutPage';
-// import OrderHistoryPage from './pages/OrderHistoryPage';
-// import UserProfilePage from './pages/UserProfilePage';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import CartPage from "./pages/CartPage";
+import PaymentSuccessPage from "./pages/PaymentSuccessPage";
 
 export default function App() {
   // Check server status when the app loads
@@ -25,10 +24,11 @@ export default function App() {
     <Router>
       <ScrollToTop />
       <div className="flex flex-col min-h-screen ">
+        <ToastContainer />
         <Routes>
           <Route element={<AuthLayout />}>
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/register" element={<SignupPage />} />
           </Route>
           <Route element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
@@ -37,11 +37,15 @@ export default function App() {
               element={<ProductsPage />}
             />
             <Route path="/products/search" element={<ProductsPage />} />
-            <Route path="/product/:productId" element={<ProductDetailPage />} />
+            <Route
+              path="/products/:productId"
+              element={<ProductDetailPage />}
+            />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/payment-success" element={<PaymentSuccessPage />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
           {/* Define other routes here as components are built:
-          <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/profile" element={<UserProfilePage />} />
           <Route path="/orders" element={<OrderHistoryPage />} />
