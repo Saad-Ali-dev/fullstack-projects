@@ -14,6 +14,9 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CartPage from "./pages/CartPage";
 import PaymentSuccessPage from "./pages/PaymentSuccessPage";
+import axios from "axios";
+
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 
 
 export default function App() {
