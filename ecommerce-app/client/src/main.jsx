@@ -5,7 +5,7 @@ import App from "./App.jsx";
 import { CartProvider } from "./context/CartContext.jsx";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://amazon-backend-production-d0c3.up.railway.app";
+axios.defaults.baseURL = process.env.VITE_BACKEND_URL;
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

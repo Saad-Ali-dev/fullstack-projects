@@ -1,7 +1,6 @@
-import { BACKEND_URL } from "./constants.js";
 const checkServerStatus = async () => {
   try {
-    const response = await fetch(`${BACKEND_URL}/`);
+    const response = await fetch(`${process.env.BACKEND_URL}/`);
     const data = await response.json();
     console.log(data);
   } catch (error) {
