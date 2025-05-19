@@ -10,7 +10,7 @@ export default defineConfig({
     host: true,
     proxy: {
       "/api": {
-        target: "http://localhost:8080",
+        target: "https://amazon-backend-production-d0c3.up.railway.app",
         changeOrigin: true,
       },
     },
