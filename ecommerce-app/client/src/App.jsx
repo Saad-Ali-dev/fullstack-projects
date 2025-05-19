@@ -14,10 +14,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CartPage from "./pages/CartPage";
 import PaymentSuccessPage from "./pages/PaymentSuccessPage";
-import axios from "axios";
-import { BACKEND_URL } from "./constants";
 
-axios.defaults.baseURL = BACKEND_URL;
 
 export default function App() {
   // Check server status when the app loads

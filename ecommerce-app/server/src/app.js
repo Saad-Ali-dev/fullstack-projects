@@ -1,13 +1,12 @@
 import express from "express";
 import cors from "cors";
-import { FRONTEND_URL } from "./constants.js";
 
 const app = express();
 app.use(express.json());
 
 // Middleware to handle CORS
 const corsOptions = {
-  origin: FRONTEND_URL,
+  origin: process.env.FRONTEND_URL,
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
   optionsSuccessStatus: 200,
