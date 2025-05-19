@@ -5,6 +5,9 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BACKEND_URL } from "../constants";
+
+
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({

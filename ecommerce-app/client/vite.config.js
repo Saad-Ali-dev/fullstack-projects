@@ -8,11 +8,5 @@ export default defineConfig({
   server: {
     port: 3000,
     host: true,
-    proxy: {
-      "/api": {
-        target: "https://amazon-backend-production-d0c3.up.railway.app",
-        changeOrigin: true,
-      },
-    },
   },
 });
