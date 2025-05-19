@@ -1,86 +1,82 @@
-'use client'; 
+"use client";
 
-import { useState, useEffect, useRef } from 'react';
-import Header from '@/components/Header';
-import Message from '@/components/Message';
-import InputArea from '@/components/InputArea';
+import { useState, useEffect, useRef } from "react";
+import Header from "@/components/Header";
+import Message from "@/components/Message";
+import InputArea from "@/components/InputArea";
 
 export default function ChatPage() {
   const [messages, setMessages] = useState([
-    { role: 'assistant', content: 'Hello! How can I help you today?' }
+    { role: "assistant", content: "Hello! How can I help you today?" },
   ]);
-  const messagesEndRef = useRef(null); 
+  const messagesEndRef = useRef(null);
 
-  // const scrollToBottom = () => {
-  //   messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  // };
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
-  // useEffect(() => {
-  //   scrollToBottom();
-  // }, [messages]);
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const handleSendMessage = async (inputText) => {
-    const newUserMessage = { role: 'user', content: inputText };
-    setMessages(prevMessages => [...prevMessages, newUserMessage]);
+    const newUserMessage = { role: "user", content: inputText };
+    setMessages((prevMessages) => [...prevMessages, newUserMessage]);
 
-    // --- LLM Integration Point (See Step 4) ---
-    // 2. Prepare message history for API
-    const messageHistory = [...messages, newUserMessage].map(msg => ({
+    // Prepare message history for API
+    const messageHistory = [...messages, newUserMessage].map((msg) => ({
       role: msg.role,
       content: msg.content,
-    })); // Send current messages + new user message
+    }));
 
-    console.log("Sending to API:", messageHistory); // For debugging
+    console.log("Sending to API:", messageHistory);
 
-    // 3. Simulate API Call & Streaming (Replace with actual fetch)
     try {
-        // --- Actual API call would go here (see Step 4) ---
-        const response = await fetch('/api/chat', {
-          method: 'POST', // Use the POST method to send data
-          headers: {
-            'Content-Type': 'application/json', // Tell the server we're sending JSON
-          },
-          body: JSON.stringify({ messages: messageHistory }) // Convert your array into a JSON string and send it inside an object with the key 'messages'
-        })
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ messages: messageHistory }),
+      });
 
-        if (!response.ok || !response.body) {
-          throw new Error('Failed to get stream');
+      if (!response.ok || !response.body) {
+        throw new Error("Failed to get stream");
       }
 
       const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let accumulatedResponse = ""; // To build the full response text
+      const decoder = new TextDecoder();
+      let accumulatedResponse = "";
 
-        // Add an initial empty assistant message to your state here
-        setMessages(prev => [...prev, { role: 'assistant', content: '' }]);
+      // Add an initial empty assistant message to state here
+      setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
 
-        while (true) {
-            const { done, value } = await reader.read(); // Read a chunk
-            if (done) break; // Stream finished
+      while (true) {
+        const { done, value } = await reader.read(); // Read a chunk
+        if (done) break;
 
-            const textChunk = decoder.decode(value, { stream: true }); // Decode chunk to text
-            accumulatedResponse += textChunk;
+        const textChunk = decoder.decode(value, { stream: true }); // Decode chunk to text
+        accumulatedResponse += textChunk;
 
-            // Update the *last* message (the assistant's response) in your state
-            setMessages(prev => {
-               const updated = [...prev];
-               updated[updated.length - 1].content = accumulatedResponse;
-               return updated;
-            });
-        }
-        // --- End Streaming Logic ---
-
+        // Update the *last* message (the assistant's response) in  state
+        setMessages((prev) => {
+          const updated = [...prev];
+          updated[updated.length - 1].content = accumulatedResponse;
+          return updated;
+        });
+      }
     } catch (error) {
-        console.error("Error fetching response:", error);
-        // Add an error message to the chat
-        setMessages(prev => [...prev, { role: 'bot', content: 'Sorry, something went wrong.' }]);
+      console.error("Error fetching response:", error);
+      setMessages((prev) => [
+        ...prev,
+        { role: "bot", content: "Sorry, something went wrong." },
+      ]);
     }
-
   };
 
   // Handle starting a new chat
   const handleNewChat = () => {
-    setMessages([]); // Clear messages array
+    setMessages([]);
   };
 
   return (
@@ -93,11 +89,11 @@ export default function ChatPage() {
           <Message key={index} message={msg} />
         ))}
       </div>
-        {/* Empty div to scroll to */}
-        <div ref={messagesEndRef} />
+      {/* Empty div to scroll to */}
+      <div ref={messagesEndRef} />
 
       {/* Input Area */}
-      <InputArea onSend={handleSendMessage}  />
+      <InputArea onSend={handleSendMessage} />
     </div>
   );
 }
