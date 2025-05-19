@@ -5,7 +5,6 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { BACKEND_URL } from "../constants";
 
 
 
@@ -65,7 +64,7 @@ const SignupPage = () => {
     try {
       // Only send name, email, password to the backend
       const signupData = { name, email, password };
-      const response = await axios.post(`api/auth/register`, signupData);
+      const response = await axios.post(`/api/auth/register`, signupData);
 
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
