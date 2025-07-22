@@ -15,8 +15,9 @@ import "react-toastify/dist/ReactToastify.css";
 import CartPage from "./pages/CartPage";
 import PaymentSuccessPage from "./pages/PaymentSuccessPage";
 import axios from "axios";
+import ChatbotPage from "./pages/ChatbotPage";
 
-axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
 
 
 export default function App() {
@@ -47,6 +48,7 @@ export default function App() {
             />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/payment-success" element={<PaymentSuccessPage />} />
+            <Route path="/chatbot" element={<ChatbotPage />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>

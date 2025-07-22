@@ -13,6 +13,8 @@ Main features of Amazon-Clone:
 - User authentication and authorization
 - Shopping cart and checkout functionality
 - Product search and filtering
+- Chatbot integration
+- Greeting e-mail on registration
 - Payment integration with Stripe and more
 
 ## Technologies (MERN Stack)

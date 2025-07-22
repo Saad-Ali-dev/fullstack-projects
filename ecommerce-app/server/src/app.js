@@ -6,7 +6,7 @@ app.use(express.json());
 
 // Middleware to handle CORS
 const corsOptions = {
-  origin: process.env.FRONTEND_URL,
+  origin: process.env.FRONTEND_URL || "http://localhost:3000",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
   optionsSuccessStatus: 200,
@@ -22,10 +22,12 @@ app.get("/", (req, res) => {
 import productRoutes from "./routes/productRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
+import chatbotRoutes from "./routes/chatbotRoutes.js";
 
 // routes declaration
 app.use("/api/products", productRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/payment", paymentRoutes);
+app.use("/api/chatbot", chatbotRoutes);
 
 export default app;
