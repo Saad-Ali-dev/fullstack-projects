@@ -14,36 +14,42 @@ export default function LowerHeader({ onOpenSidebar }) {
       </button>
       <Link
         to="/products/category/electronics"
+        aria-label="Browse Electronic Products"
         className="hover:outline hover:outline-white rounded-sm p-1 whitespace-nowrap"
       >
         Electronic
       </Link>
       <Link
         to="/products/category/clothing"
+        aria-label="Browse Clothing Products"
         className="hover:outline hover:outline-white rounded-sm p-1 whitespace-nowrap"
       >
         Fashion
       </Link>
       <Link
         to="/products/category/home"
+        aria-label="Browse Home Products"
         className="hover:outline hover:outline-white rounded-sm p-1 whitespace-nowrap"
       >
         Home
       </Link>
       <Link
         to="/products/category/kitchen"
+        aria-label="Browse Kitchen Products"
         className="hover:outline hover:outline-white rounded-sm p-1 whitespace-nowrap"
       >
         Kitchen
       </Link>
       <Link
         to="/products/category/beauty"
+        aria-label="Browse Beauty Products"
         className="hover:outline hover:outline-white rounded-sm p-1 whitespace-nowrap hidden show-on-med sm:inline-block"
       >
         Beauty
       </Link>
       <Link
         to="/products/category/watches"
+        aria-label="Browse Watch Products"
         className="hover:outline hover:outline-white rounded-sm p-1 whitespace-nowrap hidden show-on-med sm:inline-block"
       >
         Watches

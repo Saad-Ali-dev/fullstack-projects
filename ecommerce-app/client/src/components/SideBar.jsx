@@ -69,6 +69,7 @@ export default function SideBar({ isOpen, onClose }) {
                   <Link
                     to={`/products/category/${item.toLowerCase()}`}
                     key={item}
+                    aria-label={`Browse ${item} Products`}
                   >
                     <li
                       key={item}

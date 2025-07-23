@@ -129,6 +129,7 @@ const data = [
       {
         id: 13,
         imageUrl: gameBoxImg,
+        caption: "Gaming",
         itemUrl: "/products/category/electronics",
       },
     ],
@@ -207,6 +208,7 @@ const data = [
       {
         id: 22,
         imageUrl: dadGiftBoxImg,
+        caption: "Gifts",
         itemUrl: "/products/category/electronics",
       },
     ],
