@@ -2,8 +2,8 @@ import { OpenAI } from "openai";
 import { NextResponse } from "next/server";
 
 const openai = new OpenAI({
-  apiKey: process.env.GEMINI_API_KEY,
-  baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
+  apiKey: process.env.GROQ_API_KEY,
+  baseURL: "https://api.groq.com/openai/v1/",
 });
 
 export async function POST(request) {
@@ -11,7 +11,7 @@ export async function POST(request) {
 
   try {
     const stream = await openai.chat.completions.create({
-      model: "gemini-2.0-flash-lite",
+      model: "moonshotai/kimi-k2-instruct",
       messages: messages,
       stream: true,
     });
@@ -38,7 +38,7 @@ export async function POST(request) {
     console.error("API Error:", error);
     return NextResponse.json(
       { error: "Failed to get streaming response" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
